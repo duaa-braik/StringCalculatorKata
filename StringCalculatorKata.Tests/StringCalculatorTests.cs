@@ -1,6 +1,6 @@
 namespace StringCalculatorKata.Tests
 {
-    public class UnitTest1
+    public class StringCalculatorTests
     {
         [Fact]
         public void Test1()
