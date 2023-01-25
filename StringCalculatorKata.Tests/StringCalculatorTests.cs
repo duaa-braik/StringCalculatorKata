@@ -25,5 +25,14 @@ namespace StringCalculatorKata.Tests
 
             Assert.Equal(1, Output);
         }
+
+        [Fact]
+        public void ShouldReturnSumOfTheNtwoNumbers()
+        {
+            Output = StringCalculator.Add("1,2");
+
+            Assert.Equal(3, Output);
+        }
+
     }
 }
