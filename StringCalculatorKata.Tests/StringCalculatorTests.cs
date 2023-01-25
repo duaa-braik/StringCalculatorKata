@@ -10,29 +10,28 @@ namespace StringCalculatorKata.Tests
             StringCalculator = new StringCalculator();
         }
 
-        [Fact]
-        public void ShouldReturnZeroIfEmpty()
+        [Theory]
+        [InlineData("")]
+        [InlineData("1")]
+        [InlineData("1,2")]
+        public void ShouldReturnSumOfTheNtwoNumbers(String input)
         {
-            Output = StringCalculator.Add("");
+            Output = StringCalculator.Add(input);
+            if (string.IsNullOrEmpty(input))
+            {
+                Assert.Equal(0, Output);
+            }
+            else if (input.Length == 1)
+            {
+                Assert.Equal(1, Output);
+            }
+            else if (input.Length > 1)
+            {
+                Assert.Equal(3, Output);
+            }
 
-            Assert.Equal(0, Output);
         }
 
-        [Fact]
-        public void ShouldReturnTheSameNumber()
-        {
-            Output = StringCalculator.Add("1");
-
-            Assert.Equal(1, Output);
-        }
-
-        [Fact]
-        public void ShouldReturnSumOfTheNtwoNumbers()
-        {
-            Output = StringCalculator.Add("1,2");
-
-            Assert.Equal(3, Output);
-        }
 
     }
 }
