@@ -16,9 +16,31 @@ namespace StringCalculatorKata
         private void CalculateSum(string[] Numbers, out int Sum)
         {
             Sum = 0;
-            for(int i = 0; i < Numbers.Length; i++)
+            string[] Negatives = { };
+            bool HasNegatives = false;
+
+            for (int i = 0; i < Numbers.Length; i++)
             {
-                Sum += Parser(Numbers[i]);
+                int Number = Parser(Numbers[i]);
+                if (Number < 0)
+                {
+                    HasNegatives = true;
+                    Negatives = Negatives.Append(Numbers[i]).ToArray();
+                }
+                else
+                {
+                    Sum += Number;
+                }
+            }
+
+            if (HasNegatives)
+            {
+                string NagativesList = "";
+                foreach (string negative in Negatives)
+                {
+                    NagativesList += $" {negative},";
+                }
+                throw new Exception($"negatives not allowed:{NagativesList}");
             }
         }
 

@@ -36,5 +36,14 @@ namespace StringCalculatorKata.Tests
             Output = StringCalculator.Add(input);
             Assert.Equal(Expected, Output);
         }
+
+        [Theory]
+        [InlineData("1,4,-1,-5")]
+        public void ShouldThrowAnException_IfSequenceHasNegatives(String input)
+        {
+            var Exception = Assert.Throws<Exception>(() => StringCalculator.Add(input));
+
+            Assert.Equal($"negatives not allowed: -1, -5,", Exception.Message);
+        }
     }
 }
