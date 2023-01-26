@@ -11,27 +11,24 @@ namespace StringCalculatorKata.Tests
         }
 
         [Theory]
-        [InlineData("")]
-        [InlineData("1")]
-        [InlineData("1,2")]
-        public void ShouldReturnSumOfTheNtwoNumbers(String input)
+        [InlineData("", 0)]
+        [InlineData("1", 1)]
+        [InlineData("1,2,3,4", 10)]
+        public void ShouldReturnSumOfTheSumOfNumbers(String input, int Expected)
         {
             Output = StringCalculator.Add(input);
             if (string.IsNullOrEmpty(input))
             {
-                Assert.Equal(0, Output);
+                Assert.Equal(Expected, Output);
             }
             else if (input.Length == 1)
             {
-                Assert.Equal(1, Output);
+                Assert.Equal(Expected, Output);
             }
             else if (input.Length > 1)
             {
-                Assert.Equal(3, Output);
+                Assert.Equal(Expected, Output);
             }
-
         }
-
-
     }
 }

@@ -13,6 +13,15 @@ namespace StringCalculatorKata
             return int.Parse(s);
         }
 
+        private void CalculateSum(string[] Numbers, out int Sum)
+        {
+            Sum = 0;
+            for(int i = 0; i < Numbers.Length; i++)
+            {
+                Sum += Parser(Numbers[i]);
+            }
+        }
+
         public int Add(string NumbersString)
         {
             if(string.IsNullOrEmpty(NumbersString) || string.IsNullOrWhiteSpace(NumbersString))
@@ -28,7 +37,8 @@ namespace StringCalculatorKata
             } 
             else
             {
-                return Parser(Numbers[0]) + Parser(Numbers[1]);
+                CalculateSum(Numbers, out int Sum);
+                return Sum;
             }
         }
     }
