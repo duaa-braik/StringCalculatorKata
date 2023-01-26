@@ -38,9 +38,9 @@ namespace StringCalculatorKata
                 string NagativesList = "";
                 foreach (string negative in Negatives)
                 {
-                    NagativesList += $"{negative}, ";
+                    NagativesList += $" {negative},";
                 }
-                throw new Exception($"negatives not allowed: {NagativesList}");
+                throw new Exception($"negatives not allowed:{NagativesList}");
             }
         }
 
