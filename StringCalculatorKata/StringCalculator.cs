@@ -29,7 +29,9 @@ namespace StringCalculatorKata
                 return 0;
             }
 
-            string[] Numbers = NumbersString.Split(",");
+            string[] Seperators = { ",", "\n" };
+
+            string[] Numbers = NumbersString.Split(Seperators, StringSplitOptions.None);
 
             if(Numbers.Length == 1)
             {
