@@ -27,7 +27,7 @@ namespace StringCalculatorKata
                     HasNegatives = true;
                     Negatives = Negatives.Append(Numbers[i]).ToArray();
                 }
-                else
+                else if (Number <= 1000)
                 {
                     Sum += Number;
                 }

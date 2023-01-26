@@ -45,5 +45,13 @@ namespace StringCalculatorKata.Tests
 
             Assert.Equal($"negatives not allowed: -1, -5,", Exception.Message);
         }
+
+        [Theory]
+        [InlineData("//!\n1001!5!7", 12)]
+        public void ShouldReturnTheSumWithoutBigNumbers(String input, int Expected)
+        {
+            Output = StringCalculator.Add(input);
+            Assert.Equal(Expected, Output);
+        }
     }
 }
