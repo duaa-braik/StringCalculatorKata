@@ -30,10 +30,19 @@ namespace StringCalculatorKata
             }
 
             string[] Seperators = { ",", "\n" };
+            string[] Numbers;
 
-            string[] Numbers = NumbersString.Split(Seperators, StringSplitOptions.None);
+            if (NumbersString.StartsWith("//"))
+            {
+                string[] StringParts = NumbersString.Split("\n");
+                string NewDelimiter = StringParts[0][2..];
+                Seperators = Seperators.Append(NewDelimiter).ToArray();
+                NumbersString = StringParts[1];
+            }
 
-            if(Numbers.Length == 1)
+            Numbers = NumbersString.Split(Seperators, StringSplitOptions.None);
+
+            if (Numbers.Length == 1)
             {
                 return Parser(Numbers[0]);
             } 
