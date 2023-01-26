@@ -22,18 +22,32 @@ namespace StringCalculatorKata
             }
         }
 
-        public int Add(string NumbersString)
+        private static void AddNewDelimiter(ref string Sequence, ref string[] Delimiters)
         {
-            if(string.IsNullOrEmpty(NumbersString) || string.IsNullOrWhiteSpace(NumbersString))
+            string[] StringParts = Sequence.Split("\n");
+            string NewDelimiter = StringParts[0][2..];
+            Delimiters = Delimiters.Append(NewDelimiter).ToArray();
+            Sequence = StringParts[1];
+        }
+
+        public int Add(string Sequence)
+        {
+            if(string.IsNullOrEmpty(Sequence) || string.IsNullOrWhiteSpace(Sequence))
             {
                 return 0;
             }
 
-            string[] Seperators = { ",", "\n" };
+            string[] Delimiters = { ",", "\n" };
+            string[] Numbers;
 
-            string[] Numbers = NumbersString.Split(Seperators, StringSplitOptions.None);
+            if (Sequence.StartsWith("//"))
+            {
+                AddNewDelimiter(ref Sequence, ref Delimiters);
+            }
 
-            if(Numbers.Length == 1)
+            Numbers = Sequence.Split(Delimiters, StringSplitOptions.None);
+
+            if (Numbers.Length == 1)
             {
                 return Parser(Numbers[0]);
             } 
