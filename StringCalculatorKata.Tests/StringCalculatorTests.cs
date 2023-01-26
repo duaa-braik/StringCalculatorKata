@@ -31,6 +31,7 @@ namespace StringCalculatorKata.Tests
         [InlineData("1\n2,3", 6)]
         [InlineData("//;\n1;2", 3)]
         [InlineData("//!\n1!2", 3)]
+        [InlineData("1,4,-1, -5, 7", 1)]
         public void ShouldReturnSumOfTheSumOfNumbers(String input, int Expected)
         {
             Output = StringCalculator.Add(input);
