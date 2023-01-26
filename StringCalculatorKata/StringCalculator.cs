@@ -13,10 +13,21 @@ namespace StringCalculatorKata
             return int.Parse(s);
         }
 
+        private static string CreateNegativesList(string[] Negatives, out string NegativesList)
+        {
+            NegativesList = "";
+            foreach (string negative in Negatives)
+            {
+                NegativesList += $" {negative},";
+            }
+
+            return NegativesList;
+        }
+
         private void CalculateSum(string[] Numbers, out int Sum)
         {
             Sum = 0;
-            string[] Negatives = { };
+            string[] Negatives = Array.Empty<string>();
             bool HasNegatives = false;
 
             for (int i = 0; i < Numbers.Length; i++)
@@ -35,21 +46,17 @@ namespace StringCalculatorKata
 
             if (HasNegatives)
             {
-                string NagativesList = "";
-                foreach (string negative in Negatives)
-                {
-                    NagativesList += $" {negative},";
-                }
-                throw new Exception($"negatives not allowed:{NagativesList}");
+                CreateNegativesList(Negatives, out string NegativesList);
+                throw new Exception($"negatives not allowed:{NegativesList}");
             }
         }
 
-        private static void AddNewDelimiter(ref string Sequence, ref string[] Delimiters)
+        private static string AddNewDelimiter(string Sequence, ref string[] Delimiters)
         {
-            string[] StringParts = Sequence.Split("\n");
-            string NewDelimiter = StringParts[0][2..];
+            string[] SequenceParts = Sequence.Split("\n");
+            string NewDelimiter = SequenceParts[0][2..];
             Delimiters = Delimiters.Append(NewDelimiter).ToArray();
-            Sequence = StringParts[1];
+            return SequenceParts[1];
         }
 
         public int Add(string Sequence)
@@ -64,7 +71,7 @@ namespace StringCalculatorKata
 
             if (Sequence.StartsWith("//"))
             {
-                AddNewDelimiter(ref Sequence, ref Delimiters);
+                Sequence = AddNewDelimiter(Sequence, ref Delimiters);
             }
 
             Numbers = Sequence.Split(Delimiters, StringSplitOptions.None);
