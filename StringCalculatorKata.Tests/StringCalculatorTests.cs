@@ -3,7 +3,7 @@ namespace StringCalculatorKata.Tests
     public class StringCalculatorTests
     {
         private StringCalculator StringCalculator { get; }
-        private int Output { get; set; }
+        private int Actual { get; set; }
 
         public StringCalculatorTests()
         {
@@ -14,16 +14,16 @@ namespace StringCalculatorKata.Tests
         [InlineData("", 0)]
         public void ShouldReturnZeroForEmptyString(string Input, int Expected)
         {
-            Output = StringCalculator.Add(Input);
-            Assert.Equal(Expected, Output);
+            Actual = StringCalculator.Add(Input);
+            Assert.Equal(Expected, Actual);
         }
 
         [Theory]
         [InlineData("1", 1)]
         public void ShouldReturnTheSameNumber_ForSequenceWithOneNumber(string Input, int Expected)
         {
-            Output = StringCalculator.Add(Input);
-            Assert.Equal(Expected, Output);
+            Actual = StringCalculator.Add(Input);
+            Assert.Equal(Expected, Actual);
         }
 
         [Theory]
@@ -33,8 +33,8 @@ namespace StringCalculatorKata.Tests
         [InlineData("//!\n1!2", 3)]
         public void ShouldReturnSumOfTheSumOfNumbers(String input, int Expected)
         {
-            Output = StringCalculator.Add(input);
-            Assert.Equal(Expected, Output);
+            Actual = StringCalculator.Add(input);
+            Assert.Equal(Expected, Actual);
         }
 
         [Theory]
@@ -44,6 +44,14 @@ namespace StringCalculatorKata.Tests
             var Exception = Assert.Throws<Exception>(() => StringCalculator.Add(input));
 
             Assert.Equal($"negatives not allowed: -1, -5,", Exception.Message);
+        }
+
+        [Theory]
+        [InlineData("//!\n1001!5!7", 12)]
+        public void ShouldReturnTheSumWithoutBigNumbers(String input, int Expected)
+        {
+            Actual = StringCalculator.Add(input);
+            Assert.Equal(Expected, Actual);
         }
     }
 }
